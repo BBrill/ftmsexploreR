@@ -34,10 +34,10 @@ N0_mass_even <- ifelse(NtoC_max==0 ,
 #________________________Nregel___________________________####
 Nregel <- 1
 #________________________Zahler 1_________________________####
-zahler1 <- zahler_1(formcalc_raw,
-                   Intensity_Max = L$limit['Right'],
+zahler1 <- zahler_1(formcalc_raw, Intensity_Max = L$limit['Right'],
                    Intensity = formcalc_raw$Intensity, 
-                   OC = formcalc_raw$O/formcalc_raw$C)
+                   OC = formcalc_raw$O/formcalc_raw$C, 
+                   ExpMass = formcalc_raw$ExpMass)
 
 #________________________Zahler 2_________________________####
 #set DBEtoC_min & DBEtoC_max & OplusNtoC_max
