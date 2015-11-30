@@ -7,6 +7,5 @@
 
 ## Functions
 * Function to standardize data format to enter the package
-* Zahler 1 & 2 Defensif statements
-* Move Zahler 3 to Cpp
+* Zahler 1 & 2 & 3 Defensif statements
 * Optimise Zahler 2 Cpp
