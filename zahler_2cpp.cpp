@@ -2,7 +2,7 @@
 using namespace Rcpp;
 
 // [[Rcpp::export]]
-NumericVector zahler2_cpp(NumericVector HIon, NumericVector C, NumericVector N,
+NumericVector zahler_2cpp(NumericVector HIon, NumericVector C, NumericVector N,
 NumericVector O, double DBEtoC_min, double DBEtoC_max, double OplusNtoC_max) {
     
     int n = HIon.length();
