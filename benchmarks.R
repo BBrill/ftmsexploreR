@@ -2,13 +2,16 @@ library("microbenchmark")
 library("Rcpp")
 
 source("zahler_1.R")
+source("zahler_2.R")
+source("zahler_3.R")
 sourceCpp("zahler_1cpp.cpp")
 sourceCpp("zahler_2cpp.cpp")
+sourceCpp("zahler_3cpp.cpp")
 
 formcalc_raw <- read.table("C_634_FORMULAE.dat",skip=15,header=T)
 mol_type <- classify_mol(formcalc_raw)
 
-#####Zahler1
+###Zahler1----------------------------------------------------------------------
 zahler_1_R <- zahler_1(formcalc_raw,
                     Intensity_Max = 235000000,
                     Intensity = formcalc_raw$Intensity, 
@@ -47,7 +50,7 @@ microbenchmark(
 #44 times faster, but R code was not optimised before and for the instant the 
 #Cpp function does not include defensif statements
 
-#####Zahler 2
+###Zahler_2---------------------------------------------------------------------
 zahler_2_R <- zahler_2(formcalc_raw, DBEtoC_min = 0, DBEtoC_max = 5, OplusNtoC_max = 3)
 zahler_2_Cpp <- zahler2_cpp(HIon = formcalc_raw$HIon, C = formcalc_raw$C, N = formcalc_raw$N,
                  O = formcalc_raw$O, DBEtoC_min = 0, DBEtoC_max = 5, OplusNtoC_max = 3)
@@ -64,3 +67,20 @@ microbenchmark(
 
 #38 times faster, but R code was not optimised before and for the instant the 
 #Cpp function does not include defensif statements
+
+#####Zahler_3-------------------------------------------------------------------
+zahler_3_R <- zahler_3(formcalc_raw, AI_max = 1, AI_min = -20, NtoC_max = 1)
+zahler_3_Cpp <- zahler_3cpp(HIon = formcalc_raw$HIon, C = formcalc_raw$C, N = formcalc_raw$N,
+                            O = formcalc_raw$O, AI_max = 1, AI_min = -20, NtoC_max = 1)
+identical(zahler_3_R, zahler_3_Cpp)
+
+microbenchmark(
+    "zahler3R" = zahler_3(formcalc_raw, AI_max = 1, AI_min = -20, NtoC_max = 1),
+    "zahler3_cpp" = zahler_3cpp(HIon = formcalc_raw$HIon, C = formcalc_raw$C, N = formcalc_raw$N,
+                                O = formcalc_raw$O, AI_max = 1, AI_min = -20, NtoC_max = 1))
+
+#90 times faster, but R code was not optimised before and for the instant the 
+#Cpp function does not include defensif statements
+
+
+

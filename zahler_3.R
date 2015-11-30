@@ -1,5 +1,5 @@
 #' Zahler 3
-zahler_3 <- function(data, AI_max = NULL, AI_min = NULL) {
+zahler_3 <- function(data, AI_max = NULL, AI_min = NULL, NtoC_max = 1) {
   
   if(is.null(AI_max)){
     stop("You should set AI_max")
